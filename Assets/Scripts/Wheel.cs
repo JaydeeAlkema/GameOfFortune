@@ -22,6 +22,11 @@ public class Wheel : MonoBehaviour
 
 	private void Start()
 	{
+		GenerateWheel();
+	}
+
+	private void GenerateWheel()
+	{
 		if (NumberOfSlices <= 0) return;
 		if (WheelParent == null)
 		{
