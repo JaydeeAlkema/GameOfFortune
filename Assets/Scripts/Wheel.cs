@@ -34,6 +34,15 @@ public class Wheel : MonoBehaviour
 			return;
 		}
 
+		if (_slicePrefabs.Length > 0)
+			for (int i = _slicePrefabs.Length - 1; i >= 0; i--)
+			{
+				if (_slicePrefabs[i] == null)
+					continue;
+
+				Destroy(_slicePrefabs[i].gameObject);
+			}
+
 		_slicePrefabs = new SlicePrefab[NumberOfSlices];
 		_sliceAngle = 360f / NumberOfSlices;
 
