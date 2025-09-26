@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 
 public class WheelSpinner : MonoBehaviour
 {
@@ -7,7 +8,7 @@ public class WheelSpinner : MonoBehaviour
 
 	private Rigidbody _rigidbody;
 
-	private void Start()
+	public void Spin()
 	{
 		_rigidbody = WheelParent.GetComponent<Rigidbody>();
 		_rigidbody.AddTorque(Vector3.back * SpinForce, ForceMode.Impulse);

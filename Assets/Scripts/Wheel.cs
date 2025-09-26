@@ -43,7 +43,7 @@ public class Wheel : MonoBehaviour
 
 			Mesh sliceMesh = GenerateSlice(start, end, Radius, Segments);
 
-			SlicePrefab newSlice = Instantiate(SlicePrefab, Vector3.zero, Quaternion.identity, WheelParent);
+			SlicePrefab newSlice = Instantiate(SlicePrefab, WheelParent.position, Quaternion.identity, WheelParent);
 			newSlice.name = $"Slice {i}";
 
 			Color sliceColor = i % 2 == 0 ? SliceColorA : SliceColorB;
@@ -80,7 +80,7 @@ public class Wheel : MonoBehaviour
 		_currentHighlighted = index;
 	}
 
-	private static Mesh GenerateSlice(float startAngle, float endAngle, float radius, int segments)
+	private Mesh GenerateSlice(float startAngle, float endAngle, float radius, int segments)
 	{
 		Mesh mesh = new();
 		List<Vector3> vertices = new();
