@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.Experimental.Rendering;
 
@@ -27,14 +28,15 @@ public class Wheel : MonoBehaviour
 
 	private void GenerateWheel()
 	{
-		if (NumberOfSlices <= 0) return;
+		if (NumberOfSlices <= 0)
+			return;
 		if (WheelParent == null)
 		{
 			Debug.LogError("WheelParent is not assigned.");
 			return;
 		}
 
-		if (_slicePrefabs.Length > 0)
+		if (_slicePrefabs != null && _slicePrefabs.Any())
 			for (int i = _slicePrefabs.Length - 1; i >= 0; i--)
 			{
 				if (_slicePrefabs[i] == null)
@@ -80,8 +82,12 @@ public class Wheel : MonoBehaviour
 
 	private void Update()
 	{
+		if (_slicePrefabs == null || _slicePrefabs.Length == 0)
+			return;
+
 		int index = GetSliceAtPin();
-		if (index == _currentHighlighted) return;
+		if (index == _currentHighlighted)
+			return;
 
 		// Reset old
 		if (_currentHighlighted >= 0)
@@ -127,7 +133,8 @@ public class Wheel : MonoBehaviour
 
 	private int GetSliceAtPin()
 	{
-		if (NumberOfSlices <= 0) return -1;
+		if (NumberOfSlices <= 0)
+			return -1;
 
 		float zRot = WheelParent.eulerAngles.z;
 
@@ -136,7 +143,9 @@ public class Wheel : MonoBehaviour
 		normalized %= 360f;
 
 		int index = Mathf.FloorToInt(normalized / _sliceAngle) % NumberOfSlices;
-		if (index < 0) index += NumberOfSlices;
+		if (index < 0)
+			index += NumberOfSlices;
+
 		return index;
 	}
 
